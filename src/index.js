@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './bootstrap-override.scss';
 import * as serviceWorker from './serviceWorker';
-import UserSignup from './UserSignup';
+import UserSignup from './pages/UserSignup';
 
 
 ReactDOM.render(
