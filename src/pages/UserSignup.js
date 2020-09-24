@@ -11,13 +11,15 @@ class userSignup extends React.Component {
         password: null,
         repeatPassword: null,
         pendingApiCall: false,
+        errors: {}
     };
 
     onChange = event => {
         const {name, value} = event.target;
         this.setState({
-            [name]: value
+            [name]: value,
         })
+
     }
 
     onChangeClicked = event => {
@@ -43,15 +45,19 @@ class userSignup extends React.Component {
 
         try {
             // eslint-disable-next-line
-            const response = await signUp(body);
+            await signUp(body);
         } catch (error) {
+            this.setState({errors: error.response.data.error});
+            console.log(error.response.data.error.errorCode);
 
         }
         this.setState({pendingApiCall: false})
     }
 
     render() {
-        const {pendingApiCall} = this.state;
+        const {pendingApiCall, errors} = this.state;
+        const {message} = errors;
+
         return (
             <div className={"container"}>
                 <h1 className={"text-center"}>Sign Up</h1>
@@ -62,12 +68,22 @@ class userSignup extends React.Component {
                                 <div className="form-group col-md-6">
                                     <div className={"form-group"}>
                                         <label>Username</label>
-                                        <input name={"username"} className={"form-control"} onChange={this.onChange}/>
+                                        <input name={"username"}
+                                               className={message === "username" ? "form-control is-invalid" : "form-control"}
+                                               onChange={this.onChange}/>
+                                        <div className="invalid-feedback">
+                                            {this.state.errors.errorCode}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Display Name</label>
-                                    <input name={"displayName"} className={"form-control"} onChange={this.onChange}/>
+                                    <input name={"displayName"}
+                                           className={message === "displayname" ? "form-control is-invalid" : "form-control"}
+                                           onChange={this.onChange}/>
+                                    <div className="invalid-feedback">
+                                        {this.state.errors.errorCode}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -77,14 +93,24 @@ class userSignup extends React.Component {
                                 <div className="form-group col-md-6">
                                     <div className={"form-group"}>
                                         <label>Password</label>
-                                        <input name={"password"} className={"form-control"} type={"password"}
+                                        <input name={"password"}
+                                               className={message === "password" ? "form-control is-invalid" : "form-control"}
+                                               type={"password"}
                                                onChange={this.onChange}/>
+                                        <div className="invalid-feedback">
+                                            {this.state.errors.errorCode}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Password Repeat</label>
-                                    <input name={"repeatPassword"} className={"form-control"} type={"password"}
+                                    <input name={"repeatPassword"}
+                                           className={message === "repeatpassword" ? "form-control is-invalid" : "form-control"}
+                                           type={"password"}
                                            onChange={this.onChange}/>
+                                    <div className="invalid-feedback">
+                                        {this.state.errors.errorCode}
+                                    </div>
                                 </div>
                             </div>
                         </div>
