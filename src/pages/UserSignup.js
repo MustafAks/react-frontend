@@ -1,11 +1,12 @@
 import React from "react";
 import {signUp} from "../api/apiCall";
+import Input from "../component/input";
 
 class userSignup extends React.Component {
 
 
     state = {
-        username: null,
+        userName: null,
         aggre: false,
         displayName: null,
         password: null,
@@ -33,9 +34,9 @@ class userSignup extends React.Component {
     onClickSignUp = async event => {
         event.preventDefault();
 
-        const {username, displayName, password, repeatPassword, aggre} = this.state;
+        const {userName, displayName, password, repeatPassword, aggre} = this.state;
         const body = {
-            username,
+            userName,
             displayName,
             password,
             repeatPassword,
@@ -66,24 +67,12 @@ class userSignup extends React.Component {
                         <div className={"text-center"}>
                             <div className="form-row">
                                 <div className="form-group col-md-6">
-                                    <div className={"form-group"}>
-                                        <label>Username</label>
-                                        <input name={"username"}
-                                               className={message === "username" ? "form-control is-invalid" : "form-control"}
-                                               onChange={this.onChange}/>
-                                        <div className="invalid-feedback">
-                                            {this.state.errors.errorCode}
-                                        </div>
-                                    </div>
+                                    <Input name="userName" label="Username" error={this.state.errors.errorCode}
+                                           onChange={this.onChange} message={message} isPassword={false}/>
                                 </div>
                                 <div className="form-group col-md-6">
-                                    <label>Display Name</label>
-                                    <input name={"displayName"}
-                                           className={message === "displayname" ? "form-control is-invalid" : "form-control"}
-                                           onChange={this.onChange}/>
-                                    <div className="invalid-feedback">
-                                        {this.state.errors.errorCode}
-                                    </div>
+                                    <Input name="displayName" label="DisplayName" error={this.state.errors.errorCode}
+                                           onChange={this.onChange} message={message} isPassword={false}/>
                                 </div>
                             </div>
                         </div>
@@ -91,26 +80,13 @@ class userSignup extends React.Component {
                         <div className={"text-center"}>
                             <div className="form-row">
                                 <div className="form-group col-md-6">
-                                    <div className={"form-group"}>
-                                        <label>Password</label>
-                                        <input name={"password"}
-                                               className={message === "password" ? "form-control is-invalid" : "form-control"}
-                                               type={"password"}
-                                               onChange={this.onChange}/>
-                                        <div className="invalid-feedback">
-                                            {this.state.errors.errorCode}
-                                        </div>
-                                    </div>
+                                    <Input name="password" label="Password" error={this.state.errors.errorCode}
+                                           onChange={this.onChange} message={message} isPassword={true}/>
                                 </div>
                                 <div className="form-group col-md-6">
-                                    <label>Password Repeat</label>
-                                    <input name={"repeatPassword"}
-                                           className={message === "repeatpassword" ? "form-control is-invalid" : "form-control"}
-                                           type={"password"}
-                                           onChange={this.onChange}/>
-                                    <div className="invalid-feedback">
-                                        {this.state.errors.errorCode}
-                                    </div>
+                                    <Input name="repeatPassword" label="Password Repeat"
+                                           error={this.state.errors.errorCode}
+                                           onChange={this.onChange} message={message} isPassword={true}/>
                                 </div>
                             </div>
                         </div>
