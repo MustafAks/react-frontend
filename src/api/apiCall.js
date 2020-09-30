@@ -6,6 +6,6 @@ export const signUp = (body) => {
 
 }
 
-export const login = (body) => {
-    return Axios.post("user/login", body);
+export const login = (creds) => {
+        return Axios.post("auth/login", {}, {auth: creds});
 }

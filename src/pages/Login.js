@@ -1,5 +1,6 @@
 import React from "react";
 import {login} from "../api/apiCall";
+import Input from "../component/input";
 
 class Login extends React.Component {
 
@@ -18,12 +19,12 @@ class Login extends React.Component {
     onClickLogin = async (event) => {
         event.preventDefault();
         const {userName, password} = this.state;
-        const body = {
-            userName: userName,
+        let creds = {
+            username: userName,
             password: password
         }
         try {
-            await login(body);
+            await login(creds);
         } catch (error) {
             console.log(error);
         }
@@ -38,14 +39,8 @@ class Login extends React.Component {
                 <h1 className={"text-center"}>Login</h1>
                 <div>
                     <form>
-                        <div>
-                            <label>User Name</label>
-                            <input name={"userName"} className={"form-control"} onChange={this.onChange}/>
-                        </div>
-                        <div>
-                            <label>Password</label>
-                            <input name={"password"} className={"form-control"} onChange={this.onChange}/>
-                        </div>
+                        <Input label="Username" name="userName" isPassword={false} onChange = {this.onChange}/>
+                        <Input label="Password" name="password" isPassword={true} onChange = {this.onChange}/>
 
                         <div className={"text-center"}>
                             <button className={"btn btn-primary"}

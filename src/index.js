@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './bootstrap-override.scss';
 import * as serviceWorker from './serviceWorker';
-import UserSignup from './pages/UserSignup';
-//import Login from './pages/Login';
+//import UserSignup from './pages/UserSignup';
+import Login from './pages/Login';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserSignup />
+    <Login />
   </React.StrictMode>,
   document.getElementById('root')
 );
